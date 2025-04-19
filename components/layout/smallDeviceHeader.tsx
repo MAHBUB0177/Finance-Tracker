@@ -27,7 +27,7 @@ const SmallDeviceHeader = ({ isOpen, setIsOpen }: SidebarProps) => {
             </div>
 
 
-            <p className='text-xl text-red-500 font-bold pt-1'>TrendyCart</p>
+            <p className='text-xl text-red-500 font-bold pt-1'>Finance</p>
           </div>
         </Link>
 
