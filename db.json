@@ -1,0 +1,38 @@
+{
+  "accounts": [
+    {
+      "id": "1",
+      "name": "Checking",
+      "balance": 1200.5
+    },
+    {
+      "id": "2",
+      "name": "Savings",
+      "balance": 5600.75
+    },
+    {
+      "id": "3",
+      "name": "Checking-burger",
+      "balance": 1800.5
+    },
+    {
+      "id": "4",
+      "name": "burger-dog",
+      "balance": 1100.5
+    }
+  ],
+  "transactions": [
+    {
+      "id": "1",
+      "accountId": 1,
+      "amount": -100,
+      "description": "Grocery"
+    },
+    {
+      "id": "2",
+      "accountId": 1,
+      "amount": 250,
+      "description": "Salary"
+    }
+  ]
+}
