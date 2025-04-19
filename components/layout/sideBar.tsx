@@ -11,33 +11,30 @@ interface SidebarProps {
 // Define sidebar menu structure
 const menuItems = [
   {
-    title: "Home",
+    title: "Dashboard",
     icon: <FiHome className="w-5 h-5" />,
     path: "/",
     submenu: [],
   },
   {
-    title: "Dashboard",
+    title: "Transactions",
     icon: <FiUser className="w-5 h-5" />,
-    path: "",
-    submenu: [
-      { title: "Analytics", path: "/dashboard/analytics" },
-      { title: "Reports", path: "/dashboard/reports" },
-    ],
+    path: "/Transactions",
+   
+  },
+  {
+    title: "Add Transaction",
+    icon: <FiUser className="w-5 h-5" />,
+    path: "/add-Transactions",
+   
   },
 
 ];
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
-  const [submenuOpen, setSubmenuOpen] = useState<{ [key: string]: boolean }>({});
   
 
-  const toggleSubmenu = (title: string) => {
-    setSubmenuOpen((prev) => ({
-      ...prev,
-      [title]: !prev[title],
-    }));
-  };
+
 
   return (
     <div
@@ -57,28 +54,14 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
       <ul className="mt-4">
         {menuItems.map((item, index) => (
           <li key={index} className="px-4 py-2">
-            <div className="flex items-center justify-between cursor-pointer" onClick={() => item.submenu.length > 0 && toggleSubmenu(item.title)}>
+            <div className="flex items-center justify-between cursor-pointer" >
               <Link href={item.path} className="flex items-center gap-2">
                 {item.icon}
                 {isOpen && <span>{item.title}</span>}
               </Link>
-              {item.submenu.length > 0 && isOpen && (
-                submenuOpen[item.title] ? <FiChevronUp className="w-4 h-4" /> : <FiChevronDown className="w-4 h-4" />
-              )}
+           
             </div>
 
-            {/* Submenu */}
-            {item.submenu.length > 0 && submenuOpen[item.title] && isOpen && (
-              <ul className="ml-6 mt-2">
-                {item.submenu.map((sub, subIndex) => (
-                  <li key={subIndex} className="py-1">
-                    <Link href={sub.path} className="text-gray-300 text-sm">
-                      {sub.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            )}
           </li>
         ))}
       </ul>
