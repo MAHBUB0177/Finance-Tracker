@@ -32,7 +32,7 @@ const TransactionList = () => {
       });
       
 
-    console.log(filterData, 'filterData====')
+
     const _handlePageClick = (data: { selected: number }) => {
         const selectedPage = data.selected + 1; // Adjust to 1-based index
         setCurrentPageNumber(selectedPage);
