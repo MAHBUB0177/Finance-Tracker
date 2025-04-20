@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "axios": "^1.8.3",
+    "axios": "^1.8.4",
     "chart.js": "^4.4.9",
     "json-server": "^1.0.0-beta.3",
     "next": "15.2.0",

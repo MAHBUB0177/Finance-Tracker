@@ -1,8 +1,9 @@
 // Dashboard.tsx
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ChartList from './chart';
+import { GetTransactionsInfo } from '@/service/allApi';
 
 
 const transactions = [
@@ -23,7 +24,9 @@ const transactions = [
   { id: '15', description: 'Snacks', amount: -8, category: 'Food', date: '2025-04-15' },
 ];
 const Dashboard = () => {
-  const labels = ['Income', 'expenses ', ]
+
+  const[transactionsList,setTransactionsList]=useState([])
+  console.log(transactionsList,'transactionsList==')
   const incomeMap: Record<string, number> = {};
   const expenseMap: Record<string, number> = {};
 
@@ -84,21 +87,48 @@ const Dashboard = () => {
   //     },
   //   ],
   // }
+
+  const getCurrentUserInfo = async () => {
+    try {
+      const res = await GetTransactionsInfo();
+      console.log(res,'res==========')
+      if (res?.data) {
+        setTransactionsList(res?.data);
+      }
+    } catch (error) {
+      console.error("Error fetching user info:", error);
+    }
+  };
+
+  useEffect(() => {
+    getCurrentUserInfo();
+  }, []);
+
+  // Summary calculation
+const totalIncome = transactions
+.filter(tx => tx.amount > 0)
+.reduce((sum, tx) => sum + tx.amount, 0);
+
+const totalExpenses = transactions
+.filter(tx => tx.amount < 0)
+.reduce((sum, tx) => sum + tx.amount, 0);
+
+const balance = totalIncome + totalExpenses;
   return (
     <div className=''>
       {/* Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4 pb-4">
         <div className="bg-white p-4 rounded-lg shadow-md">
-          <h2 className="text-lg font-semibold text-gray-700">Total Orders</h2>
-          <p className="text-2xl font-bold text-green-600">12</p>
+          <h2 className="text-lg font-semibold text-gray-700">Total Income</h2>
+          <p className="text-2xl font-bold text-green-600">{totalIncome}</p>
         </div>
         <div className="bg-white p-4 rounded-lg shadow-md">
-          <h2 className="text-lg font-semibold text-gray-700">Pending Orders</h2>
-          <p className="text-2xl font-bold text-yellow-600">3</p>
+          <h2 className="text-lg font-semibold text-gray-700">Total Expenses</h2>
+          <p className="text-2xl font-bold text-yellow-600">{totalExpenses}</p>
         </div>
         <div className="bg-white p-4 rounded-lg shadow-md">
-          <h2 className="text-lg font-semibold text-gray-700">Total Spent</h2>
-          <p className="text-2xl font-bold text-blue-600">$500.00</p>
+          <h2 className="text-lg font-semibold text-gray-700">Total Balance</h2>
+          <p className="text-2xl font-bold text-blue-600">{balance}</p>
         </div>
       </div>
 
