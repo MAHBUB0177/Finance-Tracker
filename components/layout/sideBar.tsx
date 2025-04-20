@@ -19,7 +19,7 @@ const menuItems = [
   {
     title: "Transactions",
     icon: <FiUser className="w-5 h-5" />,
-    path: "/Transactions",
+    path: "/transaction",
    
   },
   {

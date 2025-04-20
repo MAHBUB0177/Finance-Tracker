@@ -1,0 +1,130 @@
+'use client'
+import React, { useEffect, useState } from 'react'
+import Pagination from '../common/paginate';
+import { GetAllTransaction } from '@/service/allApi';
+import { BiEdit } from 'react-icons/bi';
+import { MdDelete } from 'react-icons/md';
+import FilterTransaction from './filterTransaction';
+import { Form } from 'antd';
+
+
+type Transaction = {
+    id: string;
+    description: string;
+    amount: number;
+    category: string;
+    date: string; // Or use `Date` if you're converting it to a Date object
+};
+
+const TransactionList = () => {
+    const [form] = Form.useForm();
+    const [pageSize, setPageSize] = useState<number>(10);
+    const [pageCount, setPageCount] = useState<number>(1);
+    const [currentPageNumber, setCurrentPageNumber] = useState<number>(1);
+    const [isLoading, setIsloading] = useState(false)
+    const [isSearch, setIssearch] = useState(false)
+    const [transactionsList, setTransactionsList] = useState<Transaction[]>([]);
+
+
+    const [filterData, setFilterdata] = useState({
+        category:'',
+
+      });
+      
+
+    console.log(filterData, 'filterData====')
+    const _handlePageClick = (data: { selected: number }) => {
+        const selectedPage = data.selected + 1; // Adjust to 1-based index
+        setCurrentPageNumber(selectedPage);
+    };
+
+
+    const getallTransaction = async (currentPage: number, payload: any) => {
+        try {
+          setIsloading(true);
+          const res = await GetAllTransaction(currentPage, pageSize, payload);
+          if (res?.data) {
+            setTransactionsList(res?.data?.data);
+            setPageCount(res?.data?.pages);
+          }
+        } catch (error) {
+          console.error("Error fetching transactions:", error);
+        } finally {
+          setIsloading(false);
+        }
+      };
+      
+
+
+    useEffect(() => {
+        getallTransaction(currentPageNumber, filterData);
+    }, [currentPageNumber,isSearch]);
+
+
+    return (
+        <div className='bg-white p-4 rounded-lg shadow-md '>
+            <div className='pt-4 pb-4'>
+
+                <FilterTransaction
+                    setIssearch={setIssearch}
+                    setFilterdata={setFilterdata}
+                    filterData={filterData}
+                    setCurrentPageNumber={setCurrentPageNumber}
+                />
+
+
+            </div>
+            <div className="overflow-x-auto">
+                <>
+                    <table className="min-w-full divide-y divide-gray-200">
+                        <thead className="bg-gray-50">
+                            <tr>
+                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">description</th>
+                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">category</th>
+                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+                                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-gray-200">
+                            {
+                                transactionsList.map((item, i) => {
+                                    return (
+                                        <tr key={i}>
+                                            <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900">{item?.date}</td>
+                                            <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900">{item?.description}</td>
+                                            <td className="px-4 py-3 whitespace-nowrap text-sm text-green-600">{item?.category}</td>
+                                            <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900">{item?.amount}</td>
+                                            <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900">
+                                                <div className='flex  items-center gap-4'>
+                                                    <button>
+                                                        <BiEdit className='h-[20px] w-[20px] text-green-600' />
+                                                    </button>
+
+                                                    <button>
+                                                        <MdDelete className="h-[20px] w-[20px] text-red-500" />
+                                                    </button>
+
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                    )
+                                })
+                            }
+
+
+                        </tbody>
+                    </table>
+                </>
+
+            </div>
+
+            <div className="flex justify-end">
+                <Pagination pageCount={pageCount} forcePage={currentPageNumber - 1} handlePageClick={_handlePageClick} />
+            </div>
+        </div>
+    )
+}
+
+export default TransactionList
