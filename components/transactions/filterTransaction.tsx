@@ -14,10 +14,10 @@ interface FilterTransactionProps {
   }
 
 const FilterTransaction: React.FC<FilterTransactionProps> = ({ setIssearch, setFilterdata,filterData ,setCurrentPageNumber}) => {
-  
+  const [form] = Form.useForm(); 
   // Handle input changes and update filterData
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
-    const value = e.target.value;
+    const value = e.target.value.trim();
     setFilterdata((prevData) => ({
       ...prevData,
       [field]: value,
@@ -28,14 +28,17 @@ const FilterTransaction: React.FC<FilterTransactionProps> = ({ setIssearch, setF
 
   // Handle the Clear button click
   const handleClear = () => {
-    setFilterdata({
-        category: '',
-    });
-    setIssearch(false); // Reset search state to false
+    setFilterdata((prevData) => ({
+      ...prevData,
+      category: '',
+    }));
+    form.resetFields(['category']); // reset form input
+    setIssearch(false);
   };
 
   return (
     <div>
+      <Form form={form}>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <div>
           <Form.Item
@@ -79,7 +82,7 @@ const FilterTransaction: React.FC<FilterTransactionProps> = ({ setIssearch, setF
 
         <div className="flex justify-start gap-4">
           <button
-            className="bg-orange-400 text-white rounded-md px-2 h-[30px] w-auto"
+            className="bg-orange-400 text-white rounded-md px-2 h-[30px] w-auto cursor-pointer"
             onClick={() => {
                 setIssearch(true);
                 setCurrentPageNumber(1);
@@ -89,13 +92,14 @@ const FilterTransaction: React.FC<FilterTransactionProps> = ({ setIssearch, setF
           </button>
 
           <button
-            className="bg-red-400 text-white rounded-md px-2 h-[30px] w-auto"
+            className="bg-red-400 text-white rounded-md px-2 h-[30px] w-auto cursor-pointer"
             onClick={handleClear}
           >
             Clear
           </button>
         </div>
       </div>
+      </Form>
     </div>
   );
 };

@@ -30,7 +30,7 @@ const TransactionList = () => {
         category:'',
 
       });
-      
+      console.log(filterData,'filterData===')
 
 
     const _handlePageClick = (data: { selected: number }) => {
