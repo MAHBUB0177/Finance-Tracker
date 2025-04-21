@@ -3,15 +3,17 @@ import React from 'react';
 
 // Define the types for props
 interface FilterTransactionProps {
-    setIssearch: React.Dispatch<React.SetStateAction<boolean>>;
-    setFilterdata: React.Dispatch<React.SetStateAction<{
-        category: string;
-    }>>;
-    filterData: {
-        category: string;
-    };
-    setCurrentPageNumber: React.Dispatch<React.SetStateAction<number>>;
-  }
+  setIssearch: React.Dispatch<React.SetStateAction<boolean>>;
+  setFilterdata: React.Dispatch<React.SetStateAction<{
+    category: string;
+    amount: string; // change to string
+  }>>;
+  filterData: {
+    category: string;
+    amount: string; // change to string
+  };
+  setCurrentPageNumber: React.Dispatch<React.SetStateAction<number>>;
+}
 
 const FilterTransaction: React.FC<FilterTransactionProps> = ({ setIssearch, setFilterdata,filterData ,setCurrentPageNumber}) => {
   const [form] = Form.useForm(); 

@@ -8,14 +8,6 @@ export const GetTransactionsInfo = () => {
     return axiosInstance.get(url);
   };
 
-  // export const GetAllTransaction = (currentPageNumber: number, pageSize: number, payload: any) => {
-   
-
-  //   let url =
-  //   'transactions' +
-  //   `?_page=${currentPageNumber}&limit=${pageSize}`;
-  // return axiosInstance.get(url, payload);
-  // };
 
   export const GetAllTransaction = (
     currentPageNumber: number,
@@ -33,5 +25,33 @@ export const GetTransactionsInfo = () => {
       },
     });
   };
+
+  export const EditTransaction = (
+    currentPageNumber: number,
+    pageSize: number,
+    payload: any
+  ) => {
+    const url = 'transactions';
   
+    return axiosInstance.put(url, {
+      params: {
+        ...payload,
+        _page: currentPageNumber,
+        limit: pageSize,
+        
+      },
+    });
+  };
+
+
+  
+
+  export const GetTransactionById = (id: string | number) => {
+    const url = `transactions/${id}`;  // Using path parameter instead of query parameter
+    return axiosInstance.get(url); 
+  };
+  export const GetTransactionEditById = (editId: string | number, payload: any) => {
+    const url = `transactions/${editId}`;
+    return axiosInstance.patch(url, payload); // pass payload in the second argument
+  };
   

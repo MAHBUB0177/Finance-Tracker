@@ -71,15 +71,16 @@ const Dashboard = () => {
   }, []);
 
   // Summary calculation
-const totalIncome = transactionsList
-.filter(tx => tx.amount > 0)
-.reduce((sum, tx) => sum + tx.amount, 0);
+  const totalIncome = transactionsList
+  .filter(tx => Number(tx.amount) > 0)
+  .reduce((sum, tx) => sum + Number(tx.amount), 0);
 
 const totalExpenses = transactionsList
-.filter(tx => tx.amount < 0)
-.reduce((sum, tx) => sum + tx.amount, 0);
+  .filter(tx => Number(tx.amount) < 0)
+  .reduce((sum, tx) => sum + Number(tx.amount), 0);
 
 const balance = totalIncome + totalExpenses;
+
   return (
     <div className=''>
       {/* Stats Cards */}
