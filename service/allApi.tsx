@@ -55,3 +55,12 @@ export const GetTransactionsInfo = () => {
     return axiosInstance.patch(url, payload); // pass payload in the second argument
   };
   
+  export const DeleteTransactionById = (id: string | number) => {
+    const url = `transactions/${id}`;
+    return axiosInstance.delete(url);
+  };
+  
+  export const AddTransactionItem = (payload: any) => {
+    const url = `transactions`;
+    return axiosInstance.post(url, payload); // pass payload in the second argument
+  };

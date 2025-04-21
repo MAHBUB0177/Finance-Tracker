@@ -18,8 +18,6 @@ type Transaction = {
 };
 
 const Dashboard = () => {
-
-
   const [transactionsList, setTransactionsList] = useState<Transaction[]>([]);
   const incomeMap: Record<string, number> = {};
   const expenseMap: Record<string, number> = {};
@@ -82,8 +80,7 @@ const totalExpenses = transactionsList
 const balance = totalIncome + totalExpenses;
 
   return (
-    <div className=''>
-      {/* Stats Cards */}
+    <div >
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4 pb-4">
         <div className="bg-white p-4 rounded-lg shadow-md">
           <h2 className="text-lg font-semibold text-gray-700">Total Income</h2>

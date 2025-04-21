@@ -19,13 +19,18 @@ const FilterTransaction: React.FC<FilterTransactionProps> = ({ setIssearch, setF
   const [form] = Form.useForm(); 
   // Handle input changes and update filterData
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
-    const value = e.target.value.trim();
+    let value = e.target.value.trim();
+  
+    // If the field is 'category', convert the input to lowercase
+    if (field === 'category') {
+      value = value.toLowerCase();
+    }
     setFilterdata((prevData) => ({
       ...prevData,
       [field]: value,
     }));
   };
-
+  
 
 
   // Handle the Clear button click

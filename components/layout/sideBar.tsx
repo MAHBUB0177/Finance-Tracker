@@ -1,7 +1,8 @@
 "use client";
-import { useState } from "react";
+
 import Link from "next/link";
-import { FiMenu, FiHome, FiUser, FiSettings, FiChevronDown, FiChevronUp } from "react-icons/fi"; // Import icons
+import { FiMenu, FiHome, } from "react-icons/fi"; // Import icons
+import { FaListUl, FaMoneyBillAlt } from "react-icons/fa";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -14,20 +15,21 @@ const menuItems = [
     title: "Dashboard",
     icon: <FiHome className="w-5 h-5" />,
     path: "/",
-    submenu: [],
-  },
-  {
-    title: "Transactions",
-    icon: <FiUser className="w-5 h-5" />,
-    path: "/transaction",
-   
+    
   },
   {
     title: "Add Transaction",
-    icon: <FiUser className="w-5 h-5" />,
-    path: "/add-Transactions",
+    icon: <FaMoneyBillAlt className="w-5 h-5" />,
+    path: "/add-Transaction",
    
   },
+  {
+    title: "Transactions",
+    icon: <FaListUl  className="w-5 h-5" />,
+    path: "/transaction",
+   
+  },
+  
 
 ];
 
