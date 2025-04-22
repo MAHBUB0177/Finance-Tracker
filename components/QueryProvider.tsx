@@ -37,7 +37,7 @@ const QueryProvider = ({ children }: Props) => {
 
           {/* Main Content with adjusted padding when Sidebar is open */}
           <main style={{ minHeight: "calc(100vh)" }}
-            className="pt-[95px] md:pt-[90px] bg-[#FCFCFC] px-2 md:px-6 lg:px-4">
+            className="pt-[95px] md:pt-[90px] bg-[#FCFCFC] px-2 md:px-20 lg:px-4">
             {children}
           </main>
 

@@ -37,25 +37,25 @@ type SizeType = ConfigProviderProps['componentSize'];
       <Form form={form} onFinish={onFinish}>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <div>
-            <Form.Item name="description" rules={[{ required: false, message: "Please input your description" }]}>
+            <Form.Item name="description" rules={[{ required: true, message: "Please input your description" }]}>
               <Input placeholder="Description" style={{ height: '40px' }}/>
             </Form.Item>
           </div>
 
           <div>
-            <Form.Item name="amount" rules={[{ required: false, message: "Please input your amount" }]}>
+            <Form.Item name="amount" rules={[{ required: true, message: "Please input your amount" }]}>
               <Input placeholder="Amount" style={{ height: '40px' }}/>
             </Form.Item>
           </div>
 
           <div>
-            <Form.Item name="category" rules={[{ required: false, message: "Please input your category" }]}>
+            <Form.Item name="category" rules={[{ required: true, message: "Please input your category" }]}>
               <Input placeholder="Category" style={{ height: '40px' }}/>
             </Form.Item>
           </div>
 
           <div>
-            <Form.Item name="date" rules={[{ required: false, message: "Please input your date" }]}>
+            <Form.Item name="date" rules={[{ required: true, message: "Please input your date" }]}>
             <DatePicker
             format="MM/DD/YYYY"
             style={{ width: '100%',height: '40px' }}
@@ -65,7 +65,7 @@ type SizeType = ConfigProviderProps['componentSize'];
 
           <div className="mr-1">
           <Button type="primary" size={size} htmlType="submit" >
-            Primary
+            Submit
           </Button>
 
           </div>

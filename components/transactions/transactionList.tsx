@@ -31,27 +31,33 @@ const TransactionList = () => {
   const [isLoading, setIsloading] = useState(false);
   const [isSearch, setIssearch] = useState(false);
   const [transactionsList, setTransactionsList] = useState<Transaction[]>([]);
+  const [editId, setEditId] = useState<string | number | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
+  //filter list state 
   const [filterData, setFilterdata] = useState({
     category: "",
- date:''
+     date:''
   });
-
+console.log(filterData,'filterData===========')
+  //edit item state
   const [editData, seteditData] = useState({
     category: "",
     amount: "",
   });
+  //pagination change page 
   const _handlePageClick = (data: { selected: number }) => {
     const selectedPage = data.selected + 1; // Adjust to 1-based index
     setCurrentPageNumber(selectedPage);
   };
+  //close modal
   const _handleCancel = () => {
     setIsModalOpen(false); // Close the edit modal
   };
 
   const getallTransaction = async (currentPage: number, payload: any) => {
-    setIsloading(true);
     try {
+    setIsloading(true);
       const res = await GetAllTransaction(currentPage, pageSize, payload);
       if (res?.data) {
         setTransactionsList(res?.data?.data);
@@ -69,8 +75,7 @@ const TransactionList = () => {
     getallTransaction(currentPageNumber, filterData);
   }, [currentPageNumber, isSearch]);
 
-  const [editId, setEditId] = useState<string | number | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  
   const handleEdit = async (id: any) => {
     setEditId(id);
     const result = await GetTransactionById(id);
@@ -123,18 +128,28 @@ const TransactionList = () => {
         });
         return;
       }
-      const res = await GetTransactionEditById(editId, editData);
+      const updatedData = {
+        ...editData,
+        amount: Number(editData.amount),
+      };
+  
+      if (isNaN(updatedData.amount)) {
+        messageApi.open({
+          type: "error",
+          content: "Amount must be a valid number.",
+        });
+        return;
+      }
+      const res = await GetTransactionEditById(editId, updatedData);
       if(res.status == 200){
         messageApi.open({
           type: "success",
           content: "Successfully updated",
         });
         _handleCancel();
-        setCurrentPageNumber(1)
+        getallTransaction(1, filterData);
 
       }
-    
-    
     } catch (error) {
       messageApi.open({
         type: "error",
@@ -186,13 +201,7 @@ const TransactionList = () => {
             Loading...
           </td>
         </tr>
-      ) : transactionsList.length === 0 ? (
-        <tr>
-          <td colSpan={5} className="text-center py-4 text-gray-500">
-            No data found
-          </td>
-        </tr>
-      ) : (
+      ) : transactionsList.length > 0 ? (
         transactionsList.map((item, i) => (
           <tr key={i}>
             <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900">
@@ -219,6 +228,12 @@ const TransactionList = () => {
             </td>
           </tr>
         ))
+      ) : (
+        <tr>
+          <td colSpan={5} className="text-center py-8 text-gray-500">
+            No data found
+          </td>
+        </tr>
       )}
     </tbody>
               </table>

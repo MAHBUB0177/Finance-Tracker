@@ -32,7 +32,6 @@ const FilterTransaction: React.FC<FilterTransactionProps> = ({
     field: string
   ) => {
     let value = e.target.value.trim();
-
     // If the field is 'category', convert the input to lowercase
     if (field === "category") {
       value = value.toLowerCase();
@@ -43,19 +42,21 @@ const FilterTransaction: React.FC<FilterTransactionProps> = ({
     }));
   };
 
-  // const onChange: DatePickerProps['onChange'] = ( dateString) => {  
-  //   setFilterdata((prevData) => ({
-  //     ...prevData,
-  //     date: dateString ? dayjs(dateString).format('YYYY-MM-DD') : '',
-  //   }));
-  // };
+  const onChange: DatePickerProps['onChange'] = ( dateString) => {  
+    setFilterdata((prevData) => ({
+      ...prevData,
+      date: dateString ? dayjs(dateString).format('YYYY-MM-DD') : '',
+    }));
+  };
+
   // Handle the Clear button click
   const handleClear = () => {
     setFilterdata((prevData) => ({
       ...prevData,
       category: "",
+      date:""
     }));
-    form.resetFields(["category"]); // reset form input
+    form.resetFields(["category","date"]); // reset form input
     setIssearch(false);
   };
 
@@ -83,7 +84,7 @@ const FilterTransaction: React.FC<FilterTransactionProps> = ({
             </Form.Item>
           </div>
 
-          {/* <div>
+          <div>
             <Form.Item
               name="date"
               rules={[{ required: false, message: "Please input your date" }]}
@@ -94,7 +95,7 @@ const FilterTransaction: React.FC<FilterTransactionProps> = ({
                 onChange={onChange}
               />
             </Form.Item>
-          </div> */}
+          </div>
 
           <div className="flex justify-start gap-4">
             <Button

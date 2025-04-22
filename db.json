@@ -10,14 +10,14 @@
     {
       "id": "2",
       "description": "Monthly salary",
-      "amount": 8000,
+      "amount": 7000,
       "category": "salary",
       "date": "2025-04-02"
     },
     {
       "id": "3",
       "description": "Online purchase",
-      "amount": -750,
+      "amount": -755,
       "category": "rent",
       "date": "2025-04-03"
     },
@@ -31,14 +31,14 @@
     {
       "id": "5",
       "description": "Dinner at restaurant",
-      "amount": "-1000.5",
+      "amount": -1000.5,
       "category": "food",
       "date": "2025-04-05"
     },
     {
       "id": "6",
       "description": "Gym membership",
-      "amount": 6000,
+      "amount": 5000,
       "category": "salary",
       "date": "2025-04-06"
     },
@@ -64,13 +64,6 @@
       "date": "2025-04-09"
     },
     {
-      "id": "11",
-      "description": "Movie night",
-      "amount": -30,
-      "category": "entertainment",
-      "date": "2025-04-11"
-    },
-    {
       "id": "b8c3",
       "description": "house rent",
       "amount": "-730",
@@ -80,16 +73,23 @@
     {
       "id": "186d",
       "description": "Gas Bill",
-      "amount": "-510",
+      "amount": -511,
       "category": "Entertainment",
       "date": "2025-04-25"
     },
     {
       "id": "9daf",
       "description": "Wifi Bill",
-      "amount": "-500",
+      "amount": -500,
       "category": "Rent",
       "date": "2025-04-22"
+    },
+    {
+      "id": "3292",
+      "description": "house rent",
+      "amount": -900,
+      "category": "utilities",
+      "date": "2025-04-12"
     }
   ]
 }

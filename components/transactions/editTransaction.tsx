@@ -5,12 +5,12 @@ interface FilterTransactionProps {
     seteditData: React.Dispatch<
     React.SetStateAction<{
       category: string;
-      amount: string; // change to string
+      amount: string; 
     }>
   >;
   editData: {
     category: string;
-    amount: string; // change to string
+    amount: string;
   };
   setIsloading: React.Dispatch<React.SetStateAction<boolean>>;
 }
