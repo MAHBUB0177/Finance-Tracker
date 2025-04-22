@@ -69,6 +69,27 @@
       "amount": -30,
       "category": "entertainment",
       "date": "2025-04-11"
+    },
+    {
+      "id": "b8c3",
+      "description": "house rent",
+      "amount": "-730",
+      "category": "Food",
+      "date": "2025-04-24"
+    },
+    {
+      "id": "186d",
+      "description": "Gas Bill",
+      "amount": "-510",
+      "category": "Entertainment",
+      "date": "2025-04-25"
+    },
+    {
+      "id": "9daf",
+      "description": "Wifi Bill",
+      "amount": "-500",
+      "category": "Rent",
+      "date": "2025-04-22"
     }
   ]
 }

@@ -1,28 +1,40 @@
-import { Form, Input } from 'antd';
-import React from 'react';
+import { Button, ConfigProviderProps, DatePicker, DatePickerProps, Form, Input } from "antd";
+import React, { useState } from "react";
+import dayjs from 'dayjs';
 
 // Define the types for props
 interface FilterTransactionProps {
   setIssearch: React.Dispatch<React.SetStateAction<boolean>>;
-  setFilterdata: React.Dispatch<React.SetStateAction<{
-    category: string;
-    amount: string; // change to string
-  }>>;
+  setFilterdata: React.Dispatch<
+    React.SetStateAction<{
+      category: string;
+      date: string; // change to string
+    }>
+  >;
   filterData: {
     category: string;
-    amount: string; // change to string
+    date: string; // change to string
   };
   setCurrentPageNumber: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const FilterTransaction: React.FC<FilterTransactionProps> = ({ setIssearch, setFilterdata,filterData ,setCurrentPageNumber}) => {
-  const [form] = Form.useForm(); 
-  // Handle input changes and update filterData
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
+const FilterTransaction: React.FC<FilterTransactionProps> = ({
+  setIssearch,
+  setFilterdata,
+  filterData,
+  setCurrentPageNumber,
+}) => {
+  type SizeType = ConfigProviderProps["componentSize"];
+  const [size, setSize] = useState<SizeType>("large");
+  const [form] = Form.useForm();
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: string
+  ) => {
     let value = e.target.value.trim();
-  
+
     // If the field is 'category', convert the input to lowercase
-    if (field === 'category') {
+    if (field === "category") {
       value = value.toLowerCase();
     }
     setFilterdata((prevData) => ({
@@ -30,82 +42,78 @@ const FilterTransaction: React.FC<FilterTransactionProps> = ({ setIssearch, setF
       [field]: value,
     }));
   };
-  
 
-
+  // const onChange: DatePickerProps['onChange'] = ( dateString) => {  
+  //   setFilterdata((prevData) => ({
+  //     ...prevData,
+  //     date: dateString ? dayjs(dateString).format('YYYY-MM-DD') : '',
+  //   }));
+  // };
   // Handle the Clear button click
   const handleClear = () => {
     setFilterdata((prevData) => ({
       ...prevData,
-      category: '',
+      category: "",
     }));
-    form.resetFields(['category']); // reset form input
+    form.resetFields(["category"]); // reset form input
     setIssearch(false);
   };
 
   return (
     <div>
       <Form form={form}>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div>
-          <Form.Item
-            name="category"
-            rules={[
-              {
-                required: false,
-                message: "Please input your category",
-              },
-            ]}
-          >
-            <Input
-              type="text"
-              placeholder="category"
-              value={filterData.category}
-              onChange={(e) => handleInputChange(e, 'category')}
-            />
-          </Form.Item>
-        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div>
+            <Form.Item
+              name="category"
+              rules={[
+                {
+                  required: false,
+                  message: "Please input your category",
+                },
+              ]}
+            >
+              <Input
+                type="text"
+                style={{ height: "40px" }}
+                placeholder="category"
+                value={filterData.category}
+                onChange={(e) => handleInputChange(e, "category")}
+              />
+            </Form.Item>
+          </div>
 
-       
+          {/* <div>
+            <Form.Item
+              name="date"
+              rules={[{ required: false, message: "Please input your date" }]}
+            >
+              <DatePicker
+                format="MM/DD/YYYY"
+                style={{ width: "100%", height: "40px" }}
+                onChange={onChange}
+              />
+            </Form.Item>
+          </div> */}
 
-        {/* <div>
-          <Form.Item
-            name="Rent"
-            rules={[
-              {
-                required: false,
-                message: "Please input your Rent",
-              },
-            ]}
-          >
-            <Input
-              type="text"
-              placeholder="Rent"
-              value={filterData.Rent}
-              onChange={(e) => handleInputChange(e, 'Rent')}
-            />
-          </Form.Item>
-        </div> */}
-
-        <div className="flex justify-start gap-4">
-          <button
-            className="bg-orange-400 text-white rounded-md px-2 h-[30px] w-auto cursor-pointer"
-            onClick={() => {
+          <div className="flex justify-start gap-4">
+            <Button
+              type="primary"
+              size={size}
+              htmlType="submit"
+              onClick={() => {
                 setIssearch(true);
                 setCurrentPageNumber(1);
               }}
-          >
-            Apply
-          </button>
+            >
+              Apply
+            </Button>
 
-          <button
-            className="bg-red-400 text-white rounded-md px-2 h-[30px] w-auto cursor-pointer"
-            onClick={handleClear}
-          >
-            Clear
-          </button>
+            <Button type="primary" size={size} danger onClick={handleClear}>
+              Clear
+            </Button>
+          </div>
         </div>
-      </div>
       </Form>
     </div>
   );
