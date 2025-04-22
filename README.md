@@ -18,7 +18,7 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-## setup mock api install JSON server:
+##  setup mock api install JSON server:
 npm i json-server
 
 ## Open CMD in the project root directory and run the JSON  server to connect to the mock api:
