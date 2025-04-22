@@ -8,8 +8,7 @@ import FilterTransaction from "./filterTransaction";
 import { Button, Form, message } from "antd";
 import CommonModal from "../common/commonModal";
 import EditTransaction from "./editTransaction";
-import { errorMessage, successMessage } from "../common/commonFunction";
-import Loading from "../common/loading";
+
 
 type Transaction = {
   id: string;
@@ -20,6 +19,7 @@ type Transaction = {
 };
 
 const TransactionList = () => {
+  const [messageApi, contextHolder] = message.useMessage();
   const [form] = Form.useForm();
   const [pageSize, setPageSize] = useState<number>(10);
   const [pageCount, setPageCount] = useState<number>(1);
@@ -81,7 +81,10 @@ const TransactionList = () => {
         amount: result?.data?.amount,
       });
     } else {
-      message.error("Please try again!");
+      messageApi.open({
+        type: 'error',
+        content: "Please try again!",
+      });
     }
   };
 
@@ -89,10 +92,16 @@ const TransactionList = () => {
     try {
       const res = await DeleteTransactionById(id);
       getallTransaction(currentPageNumber, filterData);
-      successMessage("Transaction deleted successfully!");
+      messageApi.open({
+        type: 'success',
+        content: "Transaction deleted successfully!",
+      });
 
     } catch (error) {
-      errorMessage("Failed to delete transaction");
+      messageApi.open({
+        type: 'error',
+        content: "Failed to delete transaction",
+      });
     } finally {
     }
   };
@@ -102,28 +111,31 @@ const TransactionList = () => {
   const onFinish = async () => {
     try {
       if (!editId) {
-        errorMessage("No transaction selected to update.");
+        messageApi.open({
+          type: 'error',
+          content: "No transaction selected to update.",
+        });
         return;
       }
       const res = await GetTransactionEditById(editId, editData);
-      successMessage("Successfully updated");
+      messageApi.open({
+        type: 'success',
+        content: "Successfully updated",
+      });
       getallTransaction(1, filterData);
       _handleCancel();
     } catch (error) {
-      errorMessage("Something went wrong!");
+      messageApi.open({
+        type: 'error',
+        content: "Something went wrong!",
+      });
     }
   };
 
   return (
+    <>
+    {contextHolder}
     <div className="bg-white p-4 rounded-lg shadow-md ">
-
-      {
-        isLoading ? 
-        <>
-          <Loading />
-          </>
-           :
-
           <>
             <div className="pt-4 pb-4">
               <FilterTransaction
@@ -238,8 +250,8 @@ const TransactionList = () => {
               </CommonModal>
             </div>
           </>
-      }
     </div>
+    </>
   );
 };
 

@@ -31,7 +31,7 @@
     {
       "id": "5",
       "description": "Dinner at restaurant",
-      "amount": -800.5,
+      "amount": "-1000.5",
       "category": "food",
       "date": "2025-04-05"
     },
@@ -69,20 +69,6 @@
       "amount": -30,
       "category": "entertainment",
       "date": "2025-04-11"
-    },
-    {
-      "id": "2233",
-      "description": "Gas Bill",
-      "amount": "-500",
-      "category": "rent",
-      "date": "2025-04-24"
-    },
-    {
-      "id": "53a7",
-      "description": "house rent",
-      "amount": "-3000",
-      "category": "rent",
-      "date": "2025-04-25"
     }
   ]
 }
