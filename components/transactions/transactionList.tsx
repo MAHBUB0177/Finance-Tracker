@@ -29,7 +29,6 @@ const TransactionList = () => {
   const [pageCount, setPageCount] = useState<number>(1);
   const [currentPageNumber, setCurrentPageNumber] = useState<number>(1);
   const [isLoading, setIsloading] = useState(false);
-  console.log(isLoading,'isLoading============')
   const [isSearch, setIssearch] = useState(false);
   const [transactionsList, setTransactionsList] = useState<Transaction[]>([]);
   const [editId, setEditId] = useState<string | number | null>(null);
@@ -40,6 +39,7 @@ const TransactionList = () => {
     category: "",
      date:""
   });
+
   //edit item state
   const [editData, seteditData] = useState({
     category: "",
@@ -58,13 +58,13 @@ const TransactionList = () => {
   const getallTransaction = async (currentPage: number, payload: any) => {
     try {
     setIsloading(true);
-    console.log('first============')
       const res = await GetAllTransaction(currentPage, pageSize, payload);
       if (res?.data) {
         setTransactionsList(res?.data?.data);
         setPageCount(res?.data?.pages);
         setIsloading(false);
-        console.log('successfull called')
+        
+       
       }
     } catch (error) {
       console.error("Error fetching transactions:", error);

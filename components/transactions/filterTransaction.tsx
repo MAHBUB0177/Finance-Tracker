@@ -16,6 +16,7 @@ interface FilterTransactionProps {
     date: string; // change to string
   };
   setCurrentPageNumber: React.Dispatch<React.SetStateAction<number>>;
+  
 }
 
 const FilterTransaction: React.FC<FilterTransactionProps> = ({
@@ -57,7 +58,8 @@ const FilterTransaction: React.FC<FilterTransactionProps> = ({
       date:""
     }));
     form.resetFields(["category","date"]); // reset form input
-    setIssearch(false);
+    setCurrentPageNumber(1)
+    setIssearch((old) => !old);
   };
 
   return (
@@ -103,7 +105,7 @@ const FilterTransaction: React.FC<FilterTransactionProps> = ({
               size={size}
               htmlType="submit"
               onClick={() => {
-                setIssearch(true);
+                setIssearch((old) => !old);
                 setCurrentPageNumber(1);
               }}
             >
