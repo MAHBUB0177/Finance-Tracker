@@ -13,15 +13,11 @@ interface Props {
 }
 
 
-
-
 const QueryProvider = ({ children }: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  
   return (
-   
-
+  
       <div className="flex relative">
         {/* Sidebar */}
         <div className={`${isOpen ? "w-[45%] absolute md:relative md:w-[20%] lg:w-[15%]" : "hidden md:block md:[10%] lg:w-[5%]"} transition-all duration-300`} >

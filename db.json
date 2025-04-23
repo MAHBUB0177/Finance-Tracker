@@ -3,21 +3,21 @@
     {
       "id": "1",
       "description": "Grocery shopping",
-      "amount": -50.25,
+      "amount": -300,
       "category": "food",
       "date": "2025-04-01"
     },
     {
       "id": "2",
       "description": "Monthly salary",
-      "amount": 7000,
+      "amount": 8000,
       "category": "salary",
       "date": "2025-04-02"
     },
     {
       "id": "3",
       "description": "Online purchase",
-      "amount": -755,
+      "amount": -750,
       "category": "rent",
       "date": "2025-04-03"
     },
@@ -59,28 +59,28 @@
     {
       "id": "9",
       "description": "Internet bill",
-      "amount": -600,
+      "amount": -610,
       "category": "utilities",
       "date": "2025-04-09"
     },
     {
       "id": "b8c3",
       "description": "house rent",
-      "amount": "-730",
+      "amount": -760,
       "category": "Food",
       "date": "2025-04-24"
     },
     {
       "id": "186d",
       "description": "Gas Bill",
-      "amount": -511,
+      "amount": -500,
       "category": "Entertainment",
       "date": "2025-04-25"
     },
     {
       "id": "9daf",
       "description": "Wifi Bill",
-      "amount": -500,
+      "amount": -520,
       "category": "Rent",
       "date": "2025-04-22"
     },
@@ -90,6 +90,20 @@
       "amount": -900,
       "category": "utilities",
       "date": "2025-04-12"
+    },
+    {
+      "id": "0364",
+      "description": "school managment",
+      "amount": 2000,
+      "category": "salary",
+      "date": "2025-04-23"
+    },
+    {
+      "id": "8555",
+      "description": "house rent",
+      "amount": -800,
+      "category": "utilities",
+      "date": "2025-04-23"
     }
   ]
 }

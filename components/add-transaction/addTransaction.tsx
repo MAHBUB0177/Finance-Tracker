@@ -13,6 +13,7 @@ const AddTransaction = () => {
       ...values,
       category:values?.category?.toLowerCase() ,
       date: values.date ? dayjs(values.date).format('YYYY-MM-DD') : '',
+      amount: Number(values.amount)
     };
     try {
       const res = await AddTransactionItem(formattedValues);
@@ -33,7 +34,7 @@ type SizeType = ConfigProviderProps['componentSize'];
   return (
     <>
      {contextHolder}
-    <div className="bg-white p-4 rounded-lg shadow-md ">
+    <div className="bg-white p-4 rounded-lg shadow-md lg:mx-20 my-8 py-12">
       <Form form={form} onFinish={onFinish}>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <div>

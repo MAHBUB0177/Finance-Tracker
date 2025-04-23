@@ -6,9 +6,6 @@ import ChartList from './chart';
 import { GetTransactionsInfo } from '@/service/allApi';
 
 
-
-
-
 type Transaction = {
   id: string;
   description: string;

@@ -70,14 +70,14 @@ const FilterTransaction: React.FC<FilterTransactionProps> = ({
               rules={[
                 {
                   required: false,
-                  message: "Please input your category",
+                  message: "Please input your Category",
                 },
               ]}
             >
               <Input
                 type="text"
                 style={{ height: "40px" }}
-                placeholder="category"
+                placeholder="Category"
                 value={filterData.category}
                 onChange={(e) => handleInputChange(e, "category")}
               />
@@ -87,7 +87,7 @@ const FilterTransaction: React.FC<FilterTransactionProps> = ({
           <div>
             <Form.Item
               name="date"
-              rules={[{ required: false, message: "Please input your date" }]}
+              rules={[{ required: false, message: "Please input your Date" }]}
             >
               <DatePicker
                 format="MM/DD/YYYY"

@@ -29,6 +29,7 @@ const TransactionList = () => {
   const [pageCount, setPageCount] = useState<number>(1);
   const [currentPageNumber, setCurrentPageNumber] = useState<number>(1);
   const [isLoading, setIsloading] = useState(false);
+  console.log(isLoading,'isLoading============')
   const [isSearch, setIssearch] = useState(false);
   const [transactionsList, setTransactionsList] = useState<Transaction[]>([]);
   const [editId, setEditId] = useState<string | number | null>(null);
@@ -37,9 +38,8 @@ const TransactionList = () => {
   //filter list state 
   const [filterData, setFilterdata] = useState({
     category: "",
-     date:''
+     date:""
   });
-console.log(filterData,'filterData===========')
   //edit item state
   const [editData, seteditData] = useState({
     category: "",
@@ -58,18 +58,22 @@ console.log(filterData,'filterData===========')
   const getallTransaction = async (currentPage: number, payload: any) => {
     try {
     setIsloading(true);
+    console.log('first============')
       const res = await GetAllTransaction(currentPage, pageSize, payload);
       if (res?.data) {
         setTransactionsList(res?.data?.data);
         setPageCount(res?.data?.pages);
+        setIsloading(false);
+        console.log('successfull called')
       }
     } catch (error) {
       console.error("Error fetching transactions:", error);
       setIsloading(false);
-    } finally {
-      setIsloading(false);
-    }
+    } 
+   
   };
+
+
 
   useEffect(() => {
     getallTransaction(currentPageNumber, filterData);
@@ -147,7 +151,7 @@ console.log(filterData,'filterData===========')
           content: "Successfully updated",
         });
         _handleCancel();
-        getallTransaction(1, filterData);
+        getallTransaction(currentPageNumber, filterData);
 
       }
     } catch (error) {
@@ -240,8 +244,9 @@ console.log(filterData,'filterData===========')
             </>
           </div>
 
-         {transactionsList.length > 0 && <div className="flex justify-end">
+         {transactionsList.length > 0 &&  <div className="flex justify-end">
             <Pagination
+            key={currentPageNumber}
               pageCount={pageCount}
               forcePage={currentPageNumber - 1}
               handlePageClick={_handlePageClick}
