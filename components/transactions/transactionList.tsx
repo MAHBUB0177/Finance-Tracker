@@ -284,7 +284,7 @@ const TransactionList = () => {
             </CommonModal>
           </div>
 
-          <div className="bg-red-300 text-black"> demo text</div>
+          <div className="bg-red-300 text-black">demo text</div>
         </>
       </div>
     </>
